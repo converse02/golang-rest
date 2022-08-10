@@ -6,6 +6,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 
 	"example.com/restapi/internal/handlers"
+	"example.com/restapi/pkg/logging"
 )
 
 const (
@@ -14,10 +15,11 @@ const (
 )
 
 type handler struct {
+	logger logging.Logger
 }
 
-func NewHandler() handlers.Handler {
-	return &handler{}
+func NewHandler(logger logging.Logger) handlers.Handler {
+	return &handler{logger}
 }
 
 func (h *handler) Register(router *httprouter.Router) {
